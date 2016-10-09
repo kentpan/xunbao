@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0, minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>寻宝</title>
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+    <META HTTP-EQUIV="Expires" CONTENT="0">
+    <link rel="stylesheet" href="./frontend/lib/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="./frontend/lib/css/common.css"/>
+</head>
+<body>
+<header id="hd" ui-view="headerContainer"></header>
+<section id="bd">
+    <div class="block">
+        <div class="main">
+            <div class="wrap">
+                <div class="panel-body" ui-view="mainContainer">
+                </div>
+            </div>
+        </div>
+        <div class="side">
+            <div></div>
+        </div>
+    </div>
+</section>
+<footer id="ft"></footer>
+</body>
+<div ab-loading="poplayer"></div>
+<script type="text/javascript" src="./frontend/lib/js/angular.min.js"></script>
+<script type="text/javascript" src="./frontend/lib/js/angular-plugs.js"></script>
+<script type="text/javascript">
+    let $ = require('./frontend/lib/js/jquery-2.0.3.min.js');
+    window.PROJACT_Name = '寻宝';
+    window.PROJACT_Version = '1.0.1';
+    $(function(){
+        $.getScript = function (url, cb, cache) {
+            cache = cache || true;
+            cb = cb || function () {};
+            var ajax = $.ajax({
+                url: url, data: {_v: window.PROJACT_Version}, dataType: 'script', cache: cache
+            });
+            ajax.done(cb);
+        };
+        $.getScript("./frontend/config/app.config.js", function () {
+            $.getScript("./frontend/config/route.config.js");
+        });
+    });
+</script>
+</html>
