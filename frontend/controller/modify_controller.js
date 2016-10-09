@@ -53,7 +53,7 @@ angular.module(window.PROJACT_Name).controller('modify_controller',
             }
         }).then(function (ret) {
             var result = ret[0].data;
-            if (result.error_code - 0 !== 0) {
+            if (!result || !result.data) {
                 return $rootScope.poplayer = {
                     type: 'error',
                     content: '数据异常!',
@@ -62,7 +62,7 @@ angular.module(window.PROJACT_Name).controller('modify_controller',
                     }
                 };
             }
-            $scope.addtion = result.data[0];
+            $scope.addtion = result.data[0] || [];
             if (!$scope.addtion.vList) {
                 $scope.addtion.vList = [
                     angular.extend({}, baseVersion)
