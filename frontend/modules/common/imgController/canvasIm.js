@@ -37,7 +37,7 @@ var Canvas = window.Canvas || {};
     var DEFAULT_CONFIG = {  
         "TOP": { 
             key: "top", 
-            value: 10 
+            value: 10
         },
         
         "LEFT": { 
@@ -73,7 +73,7 @@ var Canvas = window.Canvas || {};
         },
         "RANDOMPOSITION": {
             key: "randomposition",
-            value: true
+            value: false
         }
     };
     
@@ -113,16 +113,17 @@ var Canvas = window.Canvas || {};
      * @param {HTMLElement | String} el The element representing the image
      */
     Canvas.Img.prototype._initElement = function(el) {
-        if(YAHOO.util.Dom.inDocument(el)) {
-            if(YAHOO.lang.isString(el)) {
+        if(!$(el).length) {
+            if(typeof el === 'string') {
                 this._oElement = document.getElementById(el);
             } 
             else {
                 this._oElement = el;
             }
-            YAHOO.util.Dom.addClass(this._oElement, Canvas.Img.CSS_CANVAS);
+            $(this._oElement).addClass(Canvas.Img.CSS_CANVAS);
         }
-        else {
+        else if (typeof el === 'object') {
+            this._oElement = el;
             // add element to the document: module.js
         }
     };
