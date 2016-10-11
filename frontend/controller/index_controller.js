@@ -5,10 +5,31 @@
 angular.module(window.PROJACT_Name).controller('index_controller',
     function ($rootScope, $scope, $state, CONFIG, fetchService) {
         var api = CONFIG.api[$state.current.name];
-        fetchService.jsonp([{
+        /*fetchService.jsonp([{
             url: api.list,
             data: {}
         }]).then(function (ret) {
             console.log(ret, '==================');
-        });
+        });*/
+        $scope.index = {};
+        $scope.btns = {};
+        $scope.index.canvasConf = {
+            bg: CONFIG.webRoot + 'modules/common/imgController/imgs/bg1.jpg'
+        };
+        $scope.btns.photo = {
+            key: 'photo',
+            value: '拍实景',
+            href: '###',
+            service: function (e) {
+                console.log(e, this);
+            }
+        };
+        $scope.btns.product = {
+            key: 'product',
+            value: '选艺品',
+            href: '#/product',
+            service: function (e) {
+                console.log(e, this);
+            }
+        };
     });

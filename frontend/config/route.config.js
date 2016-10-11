@@ -153,7 +153,7 @@ route_module.factory('permissionService', function ($q, $rootScope, CONFIG) {
             resolve: {
                 deps: ['$rootScope', '$ocLazyLoad', function ($rootScope, $ocLazyLoad) {
                     return $ocLazyLoad.load([
-                        './frontend/controller/header_controller.js'
+                        'controller/header_controller.js'
                     ]);
                 }]
             },
@@ -171,8 +171,12 @@ route_module.factory('permissionService', function ($q, $rootScope, CONFIG) {
             resolve: {
                 deps: ['$rootScope', '$ocLazyLoad', function ($rootScope, $ocLazyLoad) {
                     return $ocLazyLoad.load([
-                        './frontend/theme/default/css/index.css',
-                        './frontend/controller/index_controller.js'
+                        'theme/default/css/index.css',
+                        'controller/index_controller.js',
+                        'directives/btns.js',
+                        'modules/common/imgController/canvas.css',
+                        'modules/common/imgController/canvasEl.js',
+                        'modules/common/imgController/canvas.js'
                     ]);
                 }]
             },
@@ -183,22 +187,22 @@ route_module.factory('permissionService', function ($q, $rootScope, CONFIG) {
                 }
             }
         };
-        var addtion = {
-            name: 'addtion',
-            url: '/addtion',
+        var product = {
+            name: 'product',
+            url: '/product',
             parent: common,
             resolve: {
                 deps: ['$rootScope', '$ocLazyLoad', function ($rootScope, $ocLazyLoad) {
                     return $ocLazyLoad.load([
-                        './frontend/theme/default/css/addtion.css',
-                        './frontend/controller/addtion_controller.js'
+                        'theme/default/css/product.css',
+                        'controller/product_controller.js'
                     ]);
                 }]
             },
             views: {
                 'mainContainer@': {
-                    templateUrl: './frontend/views/addtion.html',
-                    controller: 'addtion_controller'
+                    templateUrl: './frontend/views/product.html',
+                    controller: 'product_controller'
                 }
             }
         };
@@ -227,8 +231,8 @@ route_module.factory('permissionService', function ($q, $rootScope, CONFIG) {
             .otherwise('/index');
         $stateProvider
             .state(common)
-            .state(index)
-            .state(addtion)
-            .state(modify);
+            .state(product)
+            .state(index);
+        console.log(11111111);
     }
 ]);
