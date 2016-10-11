@@ -1,0 +1,7 @@
+#canvasContainer canvas {
+    background-color: transparent;
+    border: 1px solid gray;
+    top: 0;
+    left: 0;
+    position: absolute;
+}

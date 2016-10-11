@@ -72,7 +72,7 @@ var Canvas = window.Canvas || {};
         if (el === '') {
             return;
         }
-        this._initElement(el);
+        this._initElement(el, oConfig.root);
         this._initConfig(oConfig);
         this._createCanvasBackground();
         this._createContainer();
@@ -87,9 +87,8 @@ var Canvas = window.Canvas || {};
      * @method _initElement
      * @param el {HTMLElement | String} el The element representing the Canvas
      */
-    Canvas.Element.prototype._initElement = function (el) {
-        if (!!$(el)
-            .length) {
+    Canvas.Element.prototype._initElement = function (el, root) {
+        if (!!$(el).length || !!$('#' + el).length) {
             if (typeof el === 'string') {
                 this._oElement = document.getElementById(el);
             } else {
@@ -102,7 +101,8 @@ var Canvas = window.Canvas || {};
                 var canvasEl = document.createElement('canvas');
             }
             canvasEl.id = el + '';
-            var oCanvas = document.body.insertBefore(canvasEl, document.body.firstChild);
+            root = typeof root === 'string' ? document.getElementById(root) : root;
+            var oCanvas = !!root ? root.appendChild(canvasEl) : document.body.insertBefore(canvasEl, document.body.firstChild);
             this._oElement = document.getElementById(el + '');
         }
         // it contains the active image and the listeners
