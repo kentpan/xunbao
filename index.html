@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./frontend/lib/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="./frontend/lib/css/common.css"/>
 </head>
-<body>
+<body class="{{$state.current.name}}">
 <header id="hd" ui-view="headerContainer"></header>
 <section id="bd">
     <div class="block">
@@ -33,20 +33,9 @@
 <script type="text/javascript" src="./frontend/lib/js/angular.min.js"></script>
 <script type="text/javascript" src="./frontend/lib/js/angular-plugs.js"></script>
 <script type="text/javascript">
-    window.PROJACT_Name = '寻宝';
+    window.PROJACT_Name = 'xunbao';
     window.PROJACT_Version = '1.0.1';
-    $(function(){
-        $.getScript = function (url, cb, cache) {
-            cache = cache || true;
-            cb = cb || function () {};
-            var ajax = $.ajax({
-                url: url, data: {_v: window.PROJACT_Version}, dataType: 'script', cache: cache
-            });
-            ajax.done(cb);
-        };
-        $.getScript("./frontend/config/app.config.js", function () {
-            $.getScript("./frontend/config/route.config.js");
-        });
-    });
 </script>
+<script type="text/javascript" src="./frontend/config/app.config.js"></script>
+<script type="text/javascript" src="./frontend/config/route.config.js"></script>
 </html>
