@@ -15,40 +15,32 @@ angular.module(PROJACT_Name).directive('canvas', function ($timeout, CONFIG) {
                         var _this = this;
                         var conf = $scope.$eval($attrs.canvas);
                         var root = conf.root || 'canvasContainer';
-                        console.log(conf);
-                        canvas1 = new Canvas.Element();
-                        canvas1.init('canvid1',  {root: root, width: win.width(), height: win.height()});
-                        /*var oView = new Image();
-                            oView.onload = function () {
-                                console.log(win.height(), this.height, win.width(), this.width);
-                                img.view = new Canvas.Img(this, {
-                                    top: (win.height()) / 2,
-                                    left: (win.width()) / 2
-                                });
+                        var rootDom = $('#' + root);
+                        $timeout(function () {
+                            canvas1 = new Canvas.Element();
+                            canvas1.init('canvid1',  {root: root, width: rootDom.width(), height: rootDom.height()});
+                            if (!!conf.product && conf.product !== '') {
+                                var oView = new Image();
+                                oView.onload = function () {
+                                    img.view = new Canvas.Img(this, {
+                                        top: (win.height()) / 2,
+                                        left: (win.width()) / 2
+                                    });
 
-                                canvas1.addImage(img.view);
-                                _this.showCorners.call(_this);
-                            };
-                            oView.src = 'imgs/7.jpg';*/
-                        var oBg = new Image();
-                            oBg.onload = function () {
-                                img.bg = new Canvas.Img(this, {});
-                                canvas1.setCanvasBackground(img.bg);
-                            };
-                            oBg.src = conf.bg;
-                        //img[img.length] = new Canvas.Img('img2', {});
-                        //img[img.length] = new Canvas.Img('img3', {});
-                        // img.bg = new Canvas.Img('bg', {});
-                        //img[img.length] = new Canvas.Img('img4', {});
-                        //img[img.length] = new Canvas.Img('img4', {});
-                    
-                        // @param array of images ToDo: individual images
-                        
-                        //canvas1.addImage(img[1]);
-                        //canvas1.addImage(img[2]);
-                        //canvas1.addImage(img[4]);
-         
-                        // this.initEvents();
+                                    canvas1.addImage(img.view);
+                                    _this.showCorners.call(_this);
+                                };
+                                oView.src = conf.product;
+                            }
+                            if (!!conf.bg && conf.bg !== '') {
+                                var oBg = new Image();
+                                oBg.onload = function () {
+                                    img.bg = new Canvas.Img(this, {});
+                                    canvas1.setCanvasBackground(img.bg);
+                                };
+                                oBg.src = conf.bg;
+                            }
+                        }, 0);
                     },
                     initEvents: function() {
                         var _this = this;

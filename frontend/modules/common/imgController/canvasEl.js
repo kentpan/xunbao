@@ -572,7 +572,6 @@ var Canvas = window.Canvas || {};
     Canvas.Element.prototype.findTargetCorner = function (mp, oImg) {
         var xpoints = null;
         var corners = ['tl', 'tr', 'br', 'bl'];
-        console.log(oImg.oCoords);
         for (var i in oImg.oCoords) {
             xpoints = this._findCrossPoints(mp, this._getImageLines(oImg.oCoords[i].corner));
             if (xpoints % 2 == 1 && xpoints != 0) {
