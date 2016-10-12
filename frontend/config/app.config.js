@@ -88,13 +88,19 @@ angular.module(window.PROJACT_Name, ['ngRoute', 'ui.router', 'ngCookies', 'oc.la
         'modules/common/loading/loading.css',
         'service/fetch.js'
     ]);
+
+    $rootScope.$on('$stateChangeStart', function (evt, toState, toParams, fromState, fromParams) {
+        $rootScope.poplayer = {
+            type: 'loading'
+        };
+    });
     $rootScope.$on('$stateChangeSuccess', function (evt, toState, toParams, fromState, fromParams) {
         $rootScope.params = toParams;
-        console.log($state.current.name);
         $rootScope.poplayer.type === 'loading' && ($rootScope.poplayer.type = '');
     });
     // 系统全局参数
-    $rootScope.$state = $state;
+    $rootScope.webRoot = CONFIG.webRoot;
+    $rootScope.$state  = $state;
     $rootScope.commParams = {};
     $rootScope.commCache = {};
     /*$rootScope.checkPermission = function (key, aid) {
