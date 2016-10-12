@@ -1,1 +1,16 @@
-<div waterfull="product.vList"></div>
+<div class="container">
+    <a class="agreeSelected" ng-show="product.selectedProduct" ng-click="product.selectedToCanvas()">确 定</a>
+    <ul class="waterfall-list" ng-waterfall cols="2">
+        <li ng-repeat="image in product.images" repeat-finished ng-class="{true: 'selected', false: ''}[image.isSelected]" ng-click="product.setStatus($event, image)">
+            <div class="data-block">
+                <img ng-src="{{image.url}}" alt="{{image.summary}}"/>
+                <dl>
+                    <dd>{{image.title}}</dd>
+                    <dd>{{image.summary}} 元</dd>
+                </dl>
+                <a class="ico-select"></a>
+            </div>
+        </li>
+        <div class="loadMore" ng-if="product.loadMore" ng-infinite-scroll ng-click="product.loadMoreData()">{{product.text}}</div>
+    </ul>
+</div>

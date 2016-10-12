@@ -194,7 +194,8 @@ route_module.factory('permissionService', function ($q, $rootScope, CONFIG) {
             resolve: {
                 deps: ['$rootScope', '$ocLazyLoad', function ($rootScope, $ocLazyLoad) {
                     return $ocLazyLoad.load([
-                        'theme/default/css/product.css',
+                        'modules/common/waterfall/waterfall.css',
+                        'modules/common/waterfall/angular-waterfall.js',
                         'controller/product_controller.js'
                     ]);
                 }]
@@ -206,33 +207,35 @@ route_module.factory('permissionService', function ($q, $rootScope, CONFIG) {
                 }
             }
         };
-        var modify = {
-            name: 'modify',
-           // url: '/modify/{id:[1-9]{1}[0-9]?}',
-            url: '/modify/:id',
+        var canvas = {
+            name: 'canvas',
+           // url: '/modify/:id',
+            url: '/canvas',
             parent: common,
             resolve: {
                 deps: ['$rootScope', '$ocLazyLoad', function ($rootScope, $ocLazyLoad) {
                     return $ocLazyLoad.load([
-                        './frontend/theme/default/css/addtion.css',
-                        './frontend/controller/modify_controller.js'
+                        'theme/default/css/canvas.css',
+                        'controller/canvas_controller.js',
+                        'modules/common/imgController/canvas.css',
+                        'modules/common/imgController/canvasEl.js',
+                        'modules/common/imgController/canvas.js'
                     ]);
                 }]
             },
             views: {
                 'mainContainer@': {
-                    templateUrl: './frontend/views/addtion.html',
-                    controller: 'modify_controller'
+                    templateUrl: './frontend/views/canvas.html',
+                    controller: 'canvas_controller'
                 }
             }
         };
         $urlRouterProvider
-            .when('/modify', '/modify/:id')
             .otherwise('/index');
         $stateProvider
             .state(common)
             .state(product)
+            .state(canvas)
             .state(index);
-        console.log(11111111);
     }
 ]);

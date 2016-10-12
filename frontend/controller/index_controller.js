@@ -14,7 +14,8 @@ angular.module(window.PROJACT_Name).controller('index_controller',
         $scope.index = {};
         $scope.btns = {};
         $scope.index.canvasConf = {
-            bg: CONFIG.webRoot + 'modules/common/imgController/imgs/bg1.jpg'
+            bg: $rootScope.commCache.canvasConfBg || CONFIG.webRoot + 'modules/common/imgController/imgs/bg1.jpg',
+            product: ''
         };
         $scope.btns.photo = {
             key: 'photo',

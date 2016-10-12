@@ -2,6 +2,9 @@ angular.module(window.PROJACT_Name).factory('fetchService', function ($http, $q,
     return {
         get: function(params) {
             if(!params) return {};
+            if (!angular.isArray(params)) {
+                params = [params];
+            }
             var promises = [];
             angular.forEach(params, function(param) {
                 if(!param.url) return;

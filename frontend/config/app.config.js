@@ -6,13 +6,15 @@ angular.module(window.PROJACT_Name, ['ngRoute', 'ui.router', 'ngCookies', 'oc.la
     version: window.PROJACT_Version || '1.0.1',
     webRoot: './frontend/',
     getApi: function (online) {
+        var isLocal = !!(/((kent|tianbin|qiuzhiqun|luoaihua)\.baidu\.com|\d{0,3}\.\d{0,3}\.\d{0,3}\.\d{0,3})/i
+    .test(location.hostname));
         var uri = online.match(/[^\/]+$/);
-        if (!!uri.length && online.indexOf('/api/api_') === -1) {
-            uri = this.WebRoot + '/api/api_' + uri[0] + '.json';
+        if ((!!uri.length && online.indexOf('/api/api_') === -1) || !!isLocal) {
+            uri = this.webRoot + '/api/api_' + uri[0] + '.json';
         } else {
             uri = online;
         }
-        return online;
+        return uri;
     },
     transferKbit: function (num) {
         if (!num) {
@@ -55,8 +57,8 @@ angular.module(window.PROJACT_Name, ['ngRoute', 'ui.router', 'ngCookies', 'oc.la
             list: 'api/list', // 所有组件列表
             publish: 'api/publish' // 发布组件
         },
-        addtion: { //新增组件
-            add: 'api/add' // 新增组件
+        product: { //选艺品
+            get: 'api/getimages' // 新增组件
         },
         modify: { //修改组件
             search: 'api/search', // 根据id获取组件信息
@@ -64,7 +66,6 @@ angular.module(window.PROJACT_Name, ['ngRoute', 'ui.router', 'ngCookies', 'oc.la
         }
     }
 }).run(function ($rootScope, $ocLazyLoad, $state, CONFIG) {
-    console.log(CONFIG);
     CONFIG.USERINFOS = window.USERINFOS;
     delete window.USERINFOS;
     $rootScope.poplayer = {};
@@ -89,11 +90,13 @@ angular.module(window.PROJACT_Name, ['ngRoute', 'ui.router', 'ngCookies', 'oc.la
     ]);
     $rootScope.$on('$stateChangeSuccess', function (evt, toState, toParams, fromState, fromParams) {
         $rootScope.params = toParams;
+        console.log($state.current.name);
         $rootScope.poplayer.type === 'loading' && ($rootScope.poplayer.type = '');
     });
     // 系统全局参数
     $rootScope.$state = $state;
     $rootScope.commParams = {};
+    $rootScope.commCache = {};
     /*$rootScope.checkPermission = function (key, aid) {
      aid = aid || $rootScope.params.aid;
      return permissionService.permissionCheck(key, aid);
