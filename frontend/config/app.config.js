@@ -85,7 +85,6 @@ angular.module(window.PROJACT_Name, ['ngRoute', 'ui.router', 'ngCookies', 'oc.la
         return $ocLazyLoad.__load(files, conf);
     };
     $ocLazyLoad.load([
-        'modules/common/loading/loading.css',
         'service/fetch.js'
     ]);
 
@@ -141,7 +140,49 @@ angular.module(window.PROJACT_Name, ['ngRoute', 'ui.router', 'ngCookies', 'oc.la
         user: 'user01',
         permission: ['all']
     };
-    $.getScript('./frontend/modules/common/loading/loading.js', function () {
+    function loadJsCss(items, fn) {
+        if (!angular.isArray(items)) {
+            items = [items];
+        }
+        var oHead = document.getElementsByTagName('head')[0];
+        var oBody = document.getElementsByTagName('body')[0];
+        // var fragment = document.craeteDocumentFragment();
+        (function runLoad() {
+            var callback = function () {
+                if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete") {
+                    this.onload = this.onreadystatechange = null;
+                    (!items.length) ? fn() : runLoad();
+                }
+            };
+            var file = items.shift();
+            var ext  = file.toLowerCase().match(/\.(\w+)$/);
+            ext = ext[1];
+            switch(ext) {
+                case 'css':
+                    var oDom = document.createElement('link');
+                    oDom.onload = oDom.onreadystatechange = callback;
+                    oDom.type = 'text/css';
+                    oDom.rel = 'stylesheet';
+                    oDom.href = file;
+                    break;
+                case 'js':
+                    var oDom = document.createElement('script');
+                    oDom.onload = oDom.onreadystatechange = callback;
+                    oDom.type = 'text/javascript';
+                    oDom.src = file;
+                    break;
+            }
+            oBody.appendChild(oDom);
+        })();
+    }
+    loadJsCss(['./frontend/modules/common/loading/loading.css', './frontend/modules/common/loading/loading.js'], function () {
         angular.bootstrap(html[0], [PROJACT_Name]);
     });
+    /*$.getScript('./frontend/modules/common/loading/loading.css', function () {
+            console.log(1);
+        $.getScript('./frontend/modules/common/loading/loading.js', function () {
+            console.log(2);
+            angular.bootstrap(html[0], [PROJACT_Name]);
+        });
+    });*/
 })();
