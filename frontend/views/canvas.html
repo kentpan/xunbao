@@ -4,7 +4,7 @@
 <div id="canvasMenu">
     <ul>
         <li><a class="fav">加入收藏</a></li>
-        <li><a class="switch" ng-click="canvas.switchBtns($event)">{{canvas.menuText}}</a></li>
+        <li><a ng-class="{true: 'noswitch', false: 'switch'}[canvas.switchBtn]" ng-click="canvas.switchBtns($event)">{{canvas.menuText}}</a></li>
         <li><a class="buy">立即下单</a></li>
     </ul>
 </div>
