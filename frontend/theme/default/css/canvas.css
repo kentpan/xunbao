@@ -43,6 +43,7 @@
     letter-spacing: 2px;
     text-indent: 5px;
     bottom: 50px;
+    z-index: 1;
 }
 
 .panel-body .btns:after {

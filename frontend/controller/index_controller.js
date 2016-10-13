@@ -11,8 +11,8 @@ angular.module(window.PROJACT_Name).controller('index_controller',
         }]).then(function (ret) {
             console.log(ret, '==================');
         });*/
-        $scope.index = {};
-        $scope.btns = {};
+        $scope.index = $scope.btns = $scope.canvas = {};
+        $scope.canvas.switchBtn = true;
         $scope.index.canvasConf = {
             bg: $rootScope.commCache.canvasConfBg || CONFIG.webRoot + 'modules/common/imgController/imgs/bg1.jpg',
             product: ''

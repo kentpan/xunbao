@@ -217,6 +217,7 @@ route_module.factory('permissionService', function ($q, $rootScope, CONFIG) {
                     return $ocLazyLoad.load([
                         'theme/default/css/canvas.css',
                         'controller/canvas_controller.js',
+                        'directives/btns.js',
                         'modules/common/imgController/canvas.css',
                         'modules/common/imgController/canvasEl.js',
                         'modules/common/imgController/canvas.js'

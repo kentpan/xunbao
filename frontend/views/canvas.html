@@ -1,8 +1,10 @@
 <div id="canvasContainer" canvas="canvas.canvasConf"></div>
+<div btns="btns.photo" ng-show="canvas.switchBtn"></div>
+<div btns="btns.product" ng-show="canvas.switchBtn"></div>
 <div id="canvasMenu">
     <ul>
         <li><a class="fav">加入收藏</a></li>
-        <li><a class="switch" href="#/product">换 一 换</a></li>
+        <li><a class="switch" ng-click="canvas.switchBtns($event)">{{canvas.menuText}}</a></li>
         <li><a class="buy">立即下单</a></li>
     </ul>
 </div>
