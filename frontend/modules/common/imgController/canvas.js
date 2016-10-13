@@ -1,5 +1,5 @@
 '@file: loading';
-angular.module(PROJACT_Name).directive('canvas', function ($timeout, CONFIG) {
+angular.module(PROJACT_Name).directive('canvas', function ($timeout, $rootScope) {
     var directive = {
         restrict: 'A',
         // replace: true,
@@ -20,15 +20,16 @@ angular.module(PROJACT_Name).directive('canvas', function ($timeout, CONFIG) {
                             canvas1 = new Canvas.Element();
                             canvas1.init('canvid1',  {root: root, width: rootDom.width(), height: rootDom.height()});
                             if (!!conf.product && conf.product !== '') {
+                                var config = _this.getPrevConf() || {
+                                    top: (win.height()) / 2,
+                                    left: (win.width()) / 2
+                                };
                                 var oView = new Image();
                                 oView.onload = function () {
-                                    img.view = new Canvas.Img(this, {
-                                        top: (win.height()) / 2,
-                                        left: (win.width()) / 2
-                                    });
-
+                                    img.view = new Canvas.Img(this, config);
                                     canvas1.addImage(img.view);
                                     _this.showCorners.call(_this);
+                                    $rootScope.commCache.prevProduct = img.view;
                                 };
                                 oView.src = conf.product;
                             }
@@ -41,6 +42,29 @@ angular.module(PROJACT_Name).directive('canvas', function ($timeout, CONFIG) {
                                 oBg.src = conf.bg;
                             }
                         }, 0);
+                    },
+                    getPrevConf: function () {
+                        var oPrev = $rootScope.commCache.prevProduct;
+                        if (!oPrev) {
+                            return null;
+                        } else {
+                            var t = oPrev.top;
+                            var l = oPrev.left;
+                            var w = oPrev.width;
+                            var h = oPrev.height;
+                            var sx= oPrev.scalex;
+                            var sy= oPrev.scaley;
+                            var tt= oPrev.theta;
+                            return {
+                                top: t,
+                                left: l,
+                                width: w,
+                                height: h,
+                                scalex: sx,
+                                scaley: sy,
+                                theta: tt
+                            };
+                        }
                     },
                     initEvents: function() {
                         var _this = this;
@@ -127,7 +151,7 @@ angular.module(PROJACT_Name).directive('canvas', function ($timeout, CONFIG) {
             
             
             
-            CanvasBabys.init.call(CanvasBabys);
+            CanvasBabys.init();
         }
     };
     return directive;
