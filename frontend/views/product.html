@@ -1,6 +1,6 @@
 <div class="banner">
     <a class="filter" ng-href="#/filter">筛选</a>
-    <a class="agreeSelected" ng-show="product.selectedProduct" ng-click="product.selectedToCanvas()">确 定</a>
+    <a class="{{product.selectClass}}" ng-click="product.selectedToCanvas()" ng-bind="product.selectWording"></a>
 </div>
 <div class="container">
     <ul class="waterfall-list" ng-waterfall cols="2">

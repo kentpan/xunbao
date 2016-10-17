@@ -231,12 +231,33 @@ route_module.factory('permissionService', function ($q, $rootScope, CONFIG) {
                 }
             }
         };
+        var filter = {
+            name: 'filter',
+           // url: '/modify/:id',
+            url: '/filter',
+            parent: common,
+            resolve: {
+                deps: ['$rootScope', '$ocLazyLoad', function ($rootScope, $ocLazyLoad) {
+                    return $ocLazyLoad.load([
+                        'theme/default/css/filter.css',
+                        'controller/filter_controller.js'
+                    ]);
+                }]
+            },
+            views: {
+                'mainContainer@': {
+                    templateUrl: './frontend/views/filter.html',
+                    controller: 'filter_controller'
+                }
+            }
+        };
         $urlRouterProvider
             .otherwise('/index');
         $stateProvider
             .state(common)
             .state(product)
             .state(canvas)
+            .state(filter)
             .state(index);
     }
 ]);
