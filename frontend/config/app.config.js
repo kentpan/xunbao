@@ -96,6 +96,8 @@ angular.module(window.PROJACT_Name, ['ngRoute', 'ui.router', 'ngCookies', 'oc.la
     $rootScope.$on('$stateChangeSuccess', function (evt, toState, toParams, fromState, fromParams) {
         $rootScope.params = toParams;
         $rootScope.poplayer.type === 'loading' && ($rootScope.poplayer.type = '');
+        $rootScope.$state.fromState = fromState;
+        $rootScope.$state.toState = toState;
     });
     // 系统全局参数
     $rootScope.webRoot = CONFIG.webRoot;

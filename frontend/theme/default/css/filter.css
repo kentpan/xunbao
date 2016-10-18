@@ -1,4 +1,4 @@
-.banner {
+.filter-banner {
     position: fixed;
     height: 3em;
     width: 100%;
@@ -7,29 +7,111 @@
     z-index: 10;
     text-align: center;
 }
-.banner .filter {
-    display: inline-block;
+.filter-banner .keywords-wrapper {
+    position: relative;
+}
+.filter-banner .filter {
+    display: block;
     padding: 10px 20px;
     margin: 10px auto;
-    color: #fafafa;
+    color: #666;
     font-weight: 700;
     font-size: 124%;
-    width: 70%;
+    width: 80%;
     border-radius: 30px;
     border: none;
+    position: relative;
 }
-.banner .filter:after {
+.filter-banner .keywords-wrapper:before {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 10px;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-top: 8px solid #fff;
-    width: 0;
-    height: 0;
+    top: 5px;
+    right: 3em;
+    border: 1px solid #D2D2D2;
+    border-radius: 50%;
+    width: 2.5em;
+    height: 2.5em;
+    z-index: 9;
 }
-.container {
+.filter-banner .keywords-wrapper:after {
+    content: '';
+    position: absolute;
+    font-size: 0;
+    width: 10px;
+    height: 1px;
+    display: block;
+    background-color: #d2d2d2;
+    z-index: 9;
+    bottom: 9px;
+    right: 32px;
+    transform: rotate(45deg);
+}
+.filter-container {
     width: 100%;
-    margin: 3em auto 0;
+    margin: 5em auto 0;
+}
+.filter-container .flist {
+    display: block;
+    margin: 10px 0 0;
+    padding: 10px 15px;
+    background-color: #fff;
+}
+.filter-container .flist h1 {
+    position: relative;
+    font-size: 124%;
+    padding: 0;
+    border-bottom: 1px solid #F1F1F1;
+}
+.filter-container .fcont {
+
+}
+.filter-container .fcont a{
+    display: inline-block;
+    padding: 10px 15px;
+    border: 1px solid #E0E0E0;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+.filter-container .fcont span {
+    display: block;
+    margin-top: 15px;
+}
+.filter-container .fcont span input {
+    border: none;
+    box-shadow: none;
+    border-bottom: 1px solid #e0e0e0;
+    width: 45%;
+}
+
+.unfiltered {
+    display: block;
+    cursor: pointer;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid #666;
+    background-color: rgba(0, 0, 0, .8);
+    text-align: center;
+    border-radius: 2px;
+    color: #666;
+    font-weight: 700;
+    font-size: 124%;
+}
+.filtered {
+    display: block;
+    cursor: pointer;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid #FCAD29;
+    background-color: rgba(0, 0, 0, .8);
+    text-align: center;
+    border-radius: 2px;
+    color: #FCAD29;
+    font-weight: 700;
+    font-size: 124%;
+}
+.filtered:active {
+    background-color: rgba(0, 0, 0, 1);
+    color: #fff;
 }

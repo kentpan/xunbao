@@ -1,6 +1,34 @@
-<div class="banner">
-    <input type="search" class="filter" ng-model="filter.keywords">
+<div class="filter-banner">
+    <label for="keywords" class="keywords-wrapper">
+        <input type="search" name="keywords" class="filter" ng-model="filter.keywords"/>
+    </label>
 </div>
-<div class="container">
-    
+<div class="filter-container">
+    <div class="flist">
+        <h1>价格<em class="icon-down"></em></h1>
+        <div class="fcont">
+            <a>1000 元以下</a>
+            <a>1000 - 5000</a>
+            <a>5000 - 10000</a>
+            <a>10000 - 50000</a>
+            <a>50000 以上</a>
+            <span>
+                <input type="number" name="price1" ng-model="filter.price.lower"> 至 <input type="number" name="price2" ng-model="filter.price.super">
+            </span>
+        </div>
+    </div>
+    <div class="flist">
+        <h1>尺寸<em class="icon-down"></em></h1>
+        <div class="fcont">
+            <a>50cm 元以下</a>
+            <a>50cm - 100cm</a>
+            <a>100cm - 150cm</a>
+            <a>150cm - 200cm</a>
+            <a>200cm 以上</a>
+            <span>
+                <input type="number" name="size1" ng-model="filter.size.lower"> 至 <input type="number" name="size2" ng-model="filter.size.super">
+            </span>
+        </div>
+    </div>
 </div>
+<a class="{{filter.filterClass}}" ng-click="filter.filterData()" ng-bind="filter.filterWording"></a>

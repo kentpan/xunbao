@@ -25,10 +25,12 @@ angular.module(window.PROJACT_Name)
             $scope.product.selectClass = $scope.product.selectedProduct === null ? 'agreeunSelected' : 'agreeSelected';
         };
         $scope.product.selectedToCanvas = function () {
+            var url = $rootScope.$state.fromState.name;
             if ($scope.product.selectClass === 'agreeSelected') {
+                url = 'canvas';
                 $rootScope.commCache.selectedProduct = $scope.product.selectedProduct;
             }
-            return $state.go('canvas', {});
+            return $state.go(url, {});
         };
 
         function pushData(p) {
